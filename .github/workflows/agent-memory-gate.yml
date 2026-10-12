@@ -1,0 +1,26 @@
+name: Agent Memory Gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  memory-gate:
+    name: Agent Memory Gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pull request
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check Agent Memory v2 contract
+        env:
+          MEMORY_GATE_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          MEMORY_GATE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          MEMORY_GATE_PR_BODY: ${{ github.event.pull_request.body }}
+        run: python3 scripts/agent_memory_gate.py
