@@ -104,3 +104,17 @@ Keep entries compact. Raw logs stay in their native artifact.
 Never persist secrets, credentials, tokens, cookies, private keys, secret-bearing configs, sensitive personal data, full private conversations or large raw logs as agent memory.
 
 Use sanitized facts, paths, commit SHAs and links to the authoritative artifact.
+
+## GitHub Memory Gate
+
+Pull requests are checked by `.github/workflows/agent-memory-gate.yml` using `scripts/agent_memory_gate.py`.
+
+The v1 gate is deliberately conservative:
+
+- docs-only, tests-only and workflow-only PRs pass without a memory write;
+- source, schema, configuration, migration, infrastructure or other runtime-affecting changes are treated as meaningful;
+- a meaningful PR passes when it updates durable repository Markdown memory/docs, or when the PR body contains a searchable typed event: `decision:`, `attempt-failed:`, `fix:` or `blocker:`;
+- when a meaningful change genuinely has no durable memory impact, record `Memory: none — <specific reason>` in the PR body. The reason must be explicit; a bare `none` is not accepted.
+
+The gate never creates Issues, never edits repository memory and never treats itself as a source of truth. Its job is only to stop meaningful work from disappearing without an auditable memory decision.
+
