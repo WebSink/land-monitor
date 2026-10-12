@@ -13,3 +13,12 @@ When product files and durable project documentation are introduced, treat them 
 - On resume, read the Issue and newest handoff, then reconcile it with current repository state before continuing.
 - A handoff is context, not authority: current verified repository state and newer user instructions win.
 - Never put secrets, credentials, private raw conversations, or large logs in an Issue handoff.
+
+## Agent memory v2
+
+- `docs/AGENT_MEMORY.md` is the mandatory cross-agent memory/index protocol for non-trivial work.
+- After reading this file, follow its start gate before broad exploration and its precheck before repeating a previously attempted path.
+- Before ending meaningful work, apply its stop gate so durable state, decisions, failed attempts and task continuity are persisted in the correct existing source of truth.
+- Do not create parallel `.memory/` or `.projectmem/` stores unless the user explicitly approves a future migration.
+- `CLAUDE.md` is a thin compatibility bridge only; this file remains authoritative for repository instructions.
+
