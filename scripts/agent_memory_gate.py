@@ -19,9 +19,7 @@ import sys
 from pathlib import PurePosixPath
 
 
-TYPED_EVENT_RE = re.compile(
-    r"(?im)^\s*(decision|attempt-failed|fix|blocker)\s*:\s*\S"
-)
+TYPED_EVENT_RE = re.compile(r"(?im)^\s*(decision|attempt-failed|fix|blocker)\s*:\s*\S")
 NO_MEMORY_RE = re.compile(
     r"(?im)^\s*memory(?:[- ]impact)?\s*:\s*none\s*(?:[-—:]\s*)(.{12,})$"
 )
@@ -85,7 +83,9 @@ def main() -> int:
     memory_artifacts = [p for p in paths if is_memory_artifact(p)]
 
     if not meaningful:
-        print("PASS: no meaningful product/runtime/config/schema/source change detected.")
+        print(
+            "PASS: no meaningful product/runtime/config/schema/source change detected."
+        )
         return 0
 
     print("meaningful changes:")
@@ -104,7 +104,9 @@ def main() -> int:
 
     no_memory = NO_MEMORY_RE.search(pr_body)
     if no_memory:
-        print("PASS: PR body explicitly records that no durable memory update is needed.")
+        print(
+            "PASS: PR body explicitly records that no durable memory update is needed."
+        )
         print(f"reason: {no_memory.group(1).strip()}")
         return 0
 
@@ -121,7 +123,9 @@ def main() -> int:
     print("  3. If no durable memory change is genuinely needed, add:")
     print("       Memory: none — <specific reason, at least 12 characters>")
     print("")
-    print("See docs/AGENT_MEMORY.md. The gate does not create Issues or rewrite memory.")
+    print(
+        "See docs/AGENT_MEMORY.md. The gate does not create Issues or rewrite memory."
+    )
     return 1
 
 
