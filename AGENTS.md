@@ -22,3 +22,12 @@ When product files and durable project documentation are introduced, treat them 
 - Do not create parallel `.memory/` or `.projectmem/` stores unless the user explicitly approves a future migration.
 - `CLAUDE.md` is a thin compatibility bridge only; this file remains authoritative for repository instructions.
 
+## Model escalation policy
+
+- When available, use **DeepSeek V4.1 Flash** as the default model for ordinary repository work: exploration, routine fixes, tests, documentation, Git operations, and small-to-medium refactors.
+- Do not stop, defer, or request a stronger model merely because a task looks complex, spans many files, or has a large context. First inspect the relevant evidence, localize the problem, and make a concrete solution attempt when it is safe to do so.
+- Recommend switching to **GPT-6.1 Sol** only when there is a concrete blocker that materially limits reliable progress, such as repeated evidence-backed debugging failure, conflicting cross-module constraints, unresolved architectural ambiguity, or insufficient confidence after relevant verification.
+- Recommend **GPT-6 Astra** only for the highest-complexity or highest-cost-of-error work when stronger reasoning is justified, or when GPT-6.1 Sol is still insufficient. The user's explicit model choice always wins.
+- A model-escalation recommendation must name the exact blocker and the evidence that caused it. Continue all useful work that does not depend on the switch instead of stopping early.
+- Never claim that the active model has changed unless the runtime/UI actually confirms it. In ChatGPT/Codex Desktop, model switching remains a user action unless the client explicitly exposes an authorized model-switching tool.
+
