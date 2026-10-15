@@ -6,6 +6,14 @@ This repository is currently empty/minimal. Do not invent product architecture, 
 
 When product files and durable project documentation are introduced, treat them as the source of truth and update this file accordingly.
 
+
+## Context discipline
+
+- Start non-trivial work with `AGENTS.md` -> `docs/AGENT_MEMORY.md` -> `docs/CURRENT_STATE.md` -> matching Issue/handoff when applicable -> exact task diff -> relevant files/tests.
+- Establish the review boundary first: PR base/head, `parent..commit`, or the verified checkpoint to `HEAD`. Do not perform a repository-wide audit when a small exact diff answers the task.
+- Use targeted search and read only relevant files/direct dependencies. Do not infer a future product from memory scaffolding.
+- Perform a broad/full audit only when explicitly requested or when targeted inspection cannot localize a real problem.
+
 ## GitHub handoff protocol
 
 - Use `docs/HANDOFF.md` for task/session continuity across ChatGPT, Codex, and other GitHub-capable agents.
