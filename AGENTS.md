@@ -39,3 +39,11 @@ When product files and durable project documentation are introduced, treat them 
 - A model-escalation recommendation must name the exact blocker and the evidence that caused it. Continue all useful work that does not depend on the switch instead of stopping early.
 - Never claim that the active model has changed unless the runtime/UI actually confirms it. In ChatGPT/Codex Desktop, model switching remains a user action unless the client explicitly exposes an authorized model-switching tool.
 
+## Bounded agent execution and cost discipline
+
+- Read `docs/AGENT_EXECUTION.md` before non-trivial multi-stage agent work.
+- Execute one bounded stage per agent run by default; after the stage is implemented, verified, checkpointed, and reported, **STOP** instead of automatically continuing to later stages.
+- For long briefs or tasks with several stages, persist the durable task specification in the repository or matching GitHub Issue/handoff and use short stage-specific prompts on subsequent runs.
+- Reconstruct context after compaction/reconnect from repository state, the durable task spec, current branch, and exact diff rather than replaying a large chat history.
+- If the same large context/tool sequence repeats without meaningful progress, or the provider returns quota/rate/service failures, stop and report instead of looping.
+- Keep expensive/strong-model work narrowly bounded. Prefer exact-diff independent review after implementation rather than repeated full-repository audits.
